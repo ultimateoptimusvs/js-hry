@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Breakout!</title>
+        <script src="js/phaser.min.js"></script>
+    </head>
+    <body>
+    
+    <script type="text/javascript">
+        window.onload = function() {
+
+            var SCREEN_X = 500;
+            var SCREEN_Y = 600;
+
+            var game = new Phaser.Game(SCREEN_X, SCREEN_Y, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+            var score = 0;
+            var scoreText;
+            
+            function createBrick()
+            {
+              var brick = brick.create(50, 50, 'brick');
+            
+            }
+            
+            function createBall()
+            {
+                var ball = balls.create(350, 450,"ball");
+                ball.body.gravity.y = 100;
+                ball.body.bounce.y = 2;
+            }
+            function preload()
+            {
+                game.load.image('ball', 'assets/breakout/ball.png');
+                game.load.image('brick', 'assets/breakout/brick.png');
+                game.load.image('paddle', 'assets/breakout/paddle.png');
+            }
+
+            function create()
+            {
+                //  We're going to be using physics, so enable the Arcade Physics system
+                game.physics.startSystem(Phaser.Physics.ARCADE);
+                
+                
+                game.add.sprite(50, 50, 'brick');
+
+                game.add.sprite(250, 400, 'ball');
+            
+                balls = game.add.group();
+                balls.enableBody = true;
+    
+            }
+
+            function update()
+            {  
+            createBrick;
+            }
+            
+            
+           
+            game.physics.arcade.collide(balls, platforms);
+            createBall;
+           
+        };
+
+    </script>
+
+    </body>
+</html>
