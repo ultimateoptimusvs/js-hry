@@ -17,18 +17,9 @@
             var score = 0;
             var scoreText;
             
-            function createBrick()
-            {
-              var brick = brick.create(50, 50, 'brick');
-            
-            }
-            
-            function createBall()
-            {
-                var ball = balls.create(350, 450,"ball");
-                ball.body.gravity.y = 100;
-                ball.body.bounce.y = 2;
-            }
+            var bricks;
+            var ball;
+
             function preload()
             {
                 game.load.image('ball', 'assets/breakout/ball.png');
@@ -41,26 +32,29 @@
                 //  We're going to be using physics, so enable the Arcade Physics system
                 game.physics.startSystem(Phaser.Physics.ARCADE);
                 
+                bricks = game.add.group();
+                for (var i = 0; i < 3; i++) {
+                    for (var j = 0; j < 4; j++) {
+                        createBrick(i, j);
+                    }
+                }
                 
-                game.add.sprite(50, 50, 'brick');
+                ball = game.add.sprite(250, 400, 'ball');            
+                ball.physicsBodyType = Phaser.Physics.ARCADE;
+                // ball.enableBody = true;
+                ball.rotation = 200;
+                game.physics.arcade.velocityFromRotation(ball.rotation);
 
-                game.add.sprite(250, 400, 'ball');
-            
-                balls = game.add.group();
-                balls.enableBody = true;
-    
             }
 
             function update()
             {  
-            createBrick;
             }
             
-            
-           
-            game.physics.arcade.collide(balls, platforms);
-            createBall;
-           
+            function createBrick(i, j)
+            {
+              var newBrick = bricks.create(70 + (j * 90), 50 + (i * 50), 'brick');
+            }
         };
 
     </script>
