@@ -19,8 +19,7 @@
             
             var bricks;
             var ball;
-            
-            x=250;  
+              
             function preload()
             {
                 game.load.image('ball', 'assets/breakout/ball.png');
@@ -49,7 +48,8 @@
                 ball.rotation = 1;
                 game.physics.arcade.velocityFromAngle(ball.rotation);
                 
-                paddle = game.add.sprite(x, 500, "paddle")
+                paddle = game.add.sprite(game.world.width / 2, 400, "paddle")
+                paddle.anchor.setTo(0.5);
                 game.physics.arcade.enable(paddle);
                 paddle.enableBody = true;
             }   
