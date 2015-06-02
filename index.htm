@@ -41,22 +41,20 @@
                     }
                 }
                 
-                ball = game.add.sprite(250, 400, 'ball');            
-                ball.physicsBodyType = Phaser.Physics.ARCADE;
-                game.physics.arcade.enable(ball);
-                //ball.enableBody = true;
-                ball.rotation = 1;
-                game.physics.arcade.velocityFromAngle(ball.rotation);
-                
-                paddle = game.add.sprite(game.world.width / 2, 400, "paddle")
+                paddle = game.add.sprite(game.world.width / 2, 414, "paddle")
                 paddle.anchor.setTo(0.5);
                 game.physics.arcade.enable(paddle);
                 paddle.enableBody = true;
+
+                ball = game.add.sprite(250, 400, 'ball');            
+                game.physics.enable(ball, Phaser.Physics.ARCADE);
+                ball.anchor.setTo(0.5);
+
+                ball.body.velocity.setTo(-100, -190);
             }   
 
             function update()
             {  
-                ball.rotation += 0.10;
                 
                 //if (cursors.left.isDown)
                 //)  {
