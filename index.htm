@@ -51,6 +51,8 @@
                 ball.anchor.setTo(0.5);
 
                 ball.body.velocity.setTo(-100, -190);
+                ball.body.collideWorldBounds = true;
+                ball.body.bounce.setTo(1);
             }   
 
             function update()
