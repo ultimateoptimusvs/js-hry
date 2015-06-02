@@ -13,13 +13,14 @@
             var SCREEN_X = 500;
             var SCREEN_Y = 600;
 
-            var game = new Phaser.Game(SCREEN_X, SCREEN_Y, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+            var game = new Phaser.Game(SCREEN_X, SCREEN_Y, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
             var score = 0;
             var scoreText;
             
             var bricks;
             var ball;
-
+            
+            x=250;  
             function preload()
             {
                 game.load.image('ball', 'assets/breakout/ball.png');
@@ -32,6 +33,8 @@
                 //  We're going to be using physics, so enable the Arcade Physics system
                 game.physics.startSystem(Phaser.Physics.ARCADE);
                 
+                game.physics.arcade.checkCollision.down = false;
+                
                 bricks = game.add.group();
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 4; j++) {
@@ -41,19 +44,40 @@
                 
                 ball = game.add.sprite(250, 400, 'ball');            
                 ball.physicsBodyType = Phaser.Physics.ARCADE;
-                // ball.enableBody = true;
-                ball.rotation = 200;
-                game.physics.arcade.velocityFromRotation(ball.rotation);
-
-            }
+                game.physics.arcade.enable(ball);
+                //ball.enableBody = true;
+                ball.rotation = 1;
+                game.physics.arcade.velocityFromAngle(ball.rotation);
+                
+                paddle = game.add.sprite(x, 500, "paddle")
+                game.physics.arcade.enable(paddle);
+                paddle.enableBody = true;
+            }   
 
             function update()
             {  
+                ball.rotation += 0.10;
+                
+                //if (cursors.left.isDown)
+                //)  {
+                //      //  Move to the left
+                //      paddle.body.velocity.x = -200;
+                //  }
+                //  else if (cursors.right.isDown)
+                //  {
+                //      //  Move to the right
+                //      paddle.body.velocity.x = 200;
+                //  }
             }
             
             function createBrick(i, j)
             {
-              var newBrick = bricks.create(70 + (j * 90), 50 + (i * 50), 'brick');
+                var newBrick = bricks.create(70 + (j * 90), 50 + (i * 50), 'brick');
+            }
+            
+            function render() {
+                game.debug.spriteInfo(ball, 20, 32);
+
             }
         };
 
